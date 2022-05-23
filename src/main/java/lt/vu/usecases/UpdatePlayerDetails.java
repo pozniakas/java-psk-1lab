@@ -3,7 +3,6 @@ package lt.vu.usecases;
 
 import lombok.Getter;
 import lombok.Setter;
-import lt.vu.interceptors.LoggedInvocation;
 import lt.vu.persistence.PlayersDAO;
 import lt.vu.entities.Player;
 
@@ -37,7 +36,6 @@ public class UpdatePlayerDetails implements Serializable {
     }
 
     @Transactional
-    @LoggedInvocation
     public String updatePlayerJerseyNumber() {
         try{
             playersDAO.update(this.player);

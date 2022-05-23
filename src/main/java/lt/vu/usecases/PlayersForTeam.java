@@ -10,7 +10,6 @@ import java.util.Map;
 
 import lombok.Getter;
 import lombok.Setter;
-import lt.vu.interceptors.LoggedInvocation;
 import lt.vu.persistence.PlayersDAO;
 import lt.vu.persistence.TeamsDAO;
 import lt.vu.entities.Player;
@@ -40,7 +39,6 @@ public class PlayersForTeam implements Serializable {
     }
 
     @Transactional
-    @LoggedInvocation
     public void createPlayer() {
         playerToCreate.setTeam(this.team);
         playersDAO.persist(playerToCreate);
