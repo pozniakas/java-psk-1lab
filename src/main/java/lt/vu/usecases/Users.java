@@ -2,8 +2,8 @@ package lt.vu.usecases;
 
 import lombok.Getter;
 import lombok.Setter;
-import lt.vu.persistence.TeamsDAO;
-import lt.vu.entities.Team;
+import lt.vu.entities.User;
+import lt.vu.persistence.UsersDAO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -12,28 +12,28 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Model
-public class Teams {
+public class Users {
 
     @Inject
-    private TeamsDAO teamsDAO;
+    private UsersDAO usersDAO;
 
     @Getter @Setter
-    private Team teamToCreate = new Team();
+    private User userToCreate = new User();
 
     @Getter
-    private List<Team> allTeams;
+    private List<User> allUsers;
 
     @PostConstruct
     public void init(){
-        loadAllTeams();
+        loadAllUsers();
     }
 
     @Transactional
-    public void createTeam(){
-        this.teamsDAO.persist(teamToCreate);
+    public void createUser(){
+        this.usersDAO.persist(userToCreate);
     }
 
-    private void loadAllTeams(){
-        this.allTeams = teamsDAO.loadAll();
+    private void loadAllUsers(){
+        this.allUsers = usersDAO.loadAll();
     }
 }

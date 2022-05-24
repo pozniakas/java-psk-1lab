@@ -3,8 +3,8 @@ package lt.vu.usecases;
 
 import lombok.Getter;
 import lombok.Setter;
-import lt.vu.persistence.PlayersDAO;
-import lt.vu.entities.Player;
+import lt.vu.entities.UserOrder;
+import lt.vu.persistence.OrdersDAO;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -19,29 +19,29 @@ import java.util.Map;
 @ViewScoped
 @Named
 @Getter @Setter
-public class UpdatePlayerDetails implements Serializable {
+public class UpdateOrderDetails implements Serializable {
 
-    private Player player;
+    private UserOrder order;
 
     @Inject
-    private PlayersDAO playersDAO;
+    private OrdersDAO ordersDAO;
 
     @PostConstruct
     private void init() {
         System.out.println("UpdatePlayerDetails INIT CALLED");
         Map<String, String> requestParameters =
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        Integer playerId = Integer.parseInt(requestParameters.get("playerId"));
-        this.player = playersDAO.findOne(playerId);
+        Integer orderId = Integer.parseInt(requestParameters.get("orderId"));
+        this.order = ordersDAO.findOne(orderId);
     }
 
     @Transactional
-    public String updatePlayerJerseyNumber() {
+    public String updateOrderPrice() {
         try{
-            playersDAO.update(this.player);
+            ordersDAO.update(this.order);
         } catch (OptimisticLockException e) {
-            return "/playerDetails.xhtml?faces-redirect=true&playerId=" + this.player.getId() + "&error=optimistic-lock-exception";
+            return "/orderDetails.xhtml?faces-redirect=true&orderId=" + this.order.getId() + "&error=optimistic-lock-exception";
         }
-        return "players.xhtml?teamId=" + this.player.getTeam().getId() + "&faces-redirect=true";
+        return "orders.xhtml?userId=" + this.order.getUser().getId() + "&faces-redirect=true";
     }
 }

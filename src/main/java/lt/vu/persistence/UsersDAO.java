@@ -1,6 +1,6 @@
 package lt.vu.persistence;
 
-import lt.vu.entities.Team;
+import lt.vu.entities.User;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -8,24 +8,24 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @ApplicationScoped
-public class TeamsDAO {
+public class UsersDAO {
 
     @Inject
     private EntityManager em;
 
-    public List<Team> loadAll() {
-        return em.createNamedQuery("Team.findAll", Team.class).getResultList();
+    public List<User> loadAll() {
+        return em.createNamedQuery("User.findAll", User.class).getResultList();
     }
 
     public void setEm(EntityManager em) {
         this.em = em;
     }
 
-    public void persist(Team team){
-        this.em.persist(team);
+    public void persist(User user){
+        this.em.persist(user);
     }
 
-    public Team findOne(Integer id) {
-        return em.find(Team.class, id);
+    public User findOne(Integer id) {
+        return em.find(User.class, id);
     }
 }

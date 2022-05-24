@@ -6,15 +6,44 @@
 >
 <h:head/>
 <h:body>
-    <h2>Teams:</h2>
+    <h2>Users:</h2>
     <ol>
-        <ui:repeat value="#{teams.allTeams}" var="team">
-            <li><h:link value="#{team.name}" outcome="players?teamId=#{team.id}" /></li>
+        <ui:repeat value="#{users.allUsers}" var="user">
+            <li><h:link value="#{user.name}" outcome="orders?userId=#{user.id}" /></li>
+        </ui:repeat>
+    </ol>
+    <h2>Products:</h2>
+    <ol>
+        <ui:repeat value="#{products.allProducts}" var="product">
+            <li>#{product.name} (#{product.price}€)</li>
         </ui:repeat>
     </ol>
     <h:form>
-        <h:inputText value="#{teams.teamToCreate.name}" required="true" />
-        <h:commandButton value="Add new team" actionListener="#{teams.createTeam}" action="index?faces-redirect=true"/>
+        <hr></hr>
+        <h3>Add new user</h3>
+        <h:outputText value="Name: "/>
+        <h:inputText value="#{users.userToCreate.name}" required="true" />
+        <br></br>
+        <br></br>
+        <h:outputText value="Email: "/>
+        <h:inputText value="#{users.userToCreate.email}" required="true" />
+        <br></br>
+        <br></br>
+        <h:commandButton value="Add new user" actionListener="#{users.createUser}" action="index?faces-redirect=true"/>
+        <hr></hr>
+    </h:form>
+    <h:form>
+        <h3>Add new product</h3>
+        <h:outputText value="Name: "/>
+        <h:inputText value="#{products.productToCreate.name}" required="true" />
+        <br></br>
+        <br></br>
+        <h:outputText value="Price: "/>
+        <h:inputText value="#{products.productToCreate.price}" required="true" />
+        <br></br>
+        <br></br>
+        <h:commandButton value="Add new product" actionListener="#{products.createProduct}" action="index?faces-redirect=true"/>
+        <hr></hr>
     </h:form>
     <h:link outcome="myBatis/teams" value="MyBatis implementation"/>
 </h:body>
