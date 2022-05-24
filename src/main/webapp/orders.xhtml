@@ -17,6 +17,15 @@
     </ol>
     <h:form>
         <hr></hr>
+        <h3>Update user email</h3>
+        <h:outputText value="Email: "/>
+        <h:inputText a:placeholder="enter the value" value="#{updateUserDetails.user.email}" required="true" />
+        <h:commandButton value="Update" action="#{updateUserDetails.updateUserEmail()}">
+            <f:param name="userId" value="#{updateUserDetails.user.id}" />
+        </h:commandButton>
+        <hr></hr>
+    </h:form>
+    <h:form>
         <h3>Add new order</h3>
         <h:selectManyCheckbox value="#{ordersForUser.selectedProducts}">
             <f:selectItems value="#{products.allProducts}"

@@ -25,6 +25,10 @@ public class UsersDAO {
         this.em.persist(user);
     }
 
+    public User update(User user){
+        return em.merge(user);
+    }
+
     public User findOne(Integer id) {
         return em.find(User.class, id);
     }
