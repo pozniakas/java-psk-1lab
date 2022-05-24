@@ -1,18 +1,12 @@
 package lt.vu.services;
 
-import com.github.javafaker.Faker;
+import lt.vu.services.interfaces.IGenerateName;
 
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class GenerateName {
+public class GenerateName implements IGenerateName {
     public String generateName() {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-        }
-
-        Faker faker = new Faker();
-        return faker.name().firstName();
+        return "Default Name";
     }
 }

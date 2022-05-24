@@ -1,6 +1,7 @@
 package lt.vu.persistence;
 
 import lt.vu.entities.User;
+import lt.vu.interceptors.LoggedInvocation;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -34,6 +35,7 @@ public class UsersDAO {
         return em.find(User.class, id);
     }
 
+    @LoggedInvocation
     public User findOneByName(String name) {
         try {
             User user = (User) em.createQuery("SELECT u FROM User u where u.name = :value1")

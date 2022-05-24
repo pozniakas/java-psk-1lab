@@ -6,11 +6,11 @@ import lombok.Setter;
 import lt.vu.entities.User;
 import lt.vu.persistence.UsersDAO;
 import lt.vu.services.GenerateName;
+import lt.vu.services.interfaces.IGenerateName;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.OptimisticLockException;
