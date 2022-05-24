@@ -4,8 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias type="lt.vu.mybatis.model.Team" alias="Team"/>
-        <typeAlias type="lt.vu.mybatis.model.Player" alias="Player"/>
+        <typeAlias type="lt.vu.mybatis.model.User" alias="User"/>
+        <typeAlias type="lt.vu.mybatis.model.UserOrder" alias="UserOrder"/>
+        <typeAlias type="lt.vu.mybatis.model.Product" alias="Product"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
@@ -16,7 +17,7 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="mybatis.xml/TeamMapper.xml"/>
-        <mapper resource="mybatis.xml/PlayerMapper.xml"/>
+        <mapper resource="mybatis.xml/UserMapper.xml"/>
+        <mapper resource="mybatis.xml/ProductMapper.xml"/>
     </mappers>
 </configuration>
