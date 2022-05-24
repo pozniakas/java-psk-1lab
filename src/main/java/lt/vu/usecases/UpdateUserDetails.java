@@ -6,7 +6,6 @@ import lombok.Setter;
 import lt.vu.entities.User;
 import lt.vu.persistence.UsersDAO;
 import lt.vu.services.GenerateName;
-import lt.vu.services.interfaces.IGenerateName;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;

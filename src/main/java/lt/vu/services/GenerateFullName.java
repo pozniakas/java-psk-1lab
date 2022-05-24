@@ -4,7 +4,6 @@ import com.github.javafaker.Faker;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Alternative;
-import javax.enterprise.inject.Specializes;
 
 
 @ApplicationScoped
