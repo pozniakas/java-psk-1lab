@@ -5,8 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lt.vu.entities.User;
 import lt.vu.persistence.UsersDAO;
+import lt.vu.services.GenerateName;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -15,11 +17,17 @@ import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
-@ViewScoped
+@SessionScoped
 @Named
 @Getter @Setter
 public class UpdateUserDetails implements Serializable {
+    @Inject
+    GenerateName nameGenerator;
+
+    private CompletableFuture<String> taskToGenerateName = null;
 
     private User user;
 
@@ -39,8 +47,25 @@ public class UpdateUserDetails implements Serializable {
         try {
             usersDAO.update(this.user);
         } catch (OptimisticLockException e) {
-                return "/orders.xhtml?faces-redirect=true&userId=" + this.user.getId();
+                return "/orders.xhtml?faces-redirect=true&userId=" + this.user.getId()+ "&error=optimistic-lock-exception";
         }
         return "orders.xhtml?userId=" + this.user.getId() + "&faces-redirect=true";
+    }
+
+    @Transactional
+    public void generateUserName() {
+        taskToGenerateName = CompletableFuture.supplyAsync(() -> nameGenerator.generateName());
+    }
+
+    public String getGeneratedName() throws ExecutionException, InterruptedException {
+        if (taskToGenerateName == null)
+        {
+            return "Not generating";
+        }
+        if (taskToGenerateName.isDone()) {
+            return taskToGenerateName.get();
+        }
+
+        return "Generating...";
     }
 }

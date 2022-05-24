@@ -17,12 +17,22 @@
     </ol>
     <h:form>
         <hr></hr>
+        <h3>Generate new user name</h3>
+        <h:outputText value="Generated name: #{updateUserDetails.generatedName}" />
+        <br></br>
+        <h:commandButton value="Generate new name" actionListener="#{updateUserDetails.generateUserName}">
+            <f:param name="userId" value="#{updateUserDetails.user.id}" />
+        </h:commandButton>
+    </h:form>
+    <h:form>
+        <hr></hr>
         <h3>Update user email</h3>
         <h:outputText value="Email: "/>
         <h:inputText a:placeholder="enter the value" value="#{updateUserDetails.user.email}" required="true" />
         <h:commandButton value="Update" action="#{updateUserDetails.updateUserEmail()}">
             <f:param name="userId" value="#{updateUserDetails.user.id}" />
         </h:commandButton>
+        <h:outputText value="Email was already updated by other user. If you want to override it - try again" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
         <hr></hr>
     </h:form>
     <h:form>

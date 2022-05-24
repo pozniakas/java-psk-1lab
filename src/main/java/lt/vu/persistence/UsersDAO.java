@@ -5,6 +5,7 @@ import lt.vu.entities.User;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @ApplicationScoped
@@ -31,5 +32,16 @@ public class UsersDAO {
 
     public User findOne(Integer id) {
         return em.find(User.class, id);
+    }
+
+    public User findOneByName(String name) {
+        try {
+            User user = (User) em.createQuery("SELECT u FROM User u where u.name = :value1")
+                    .setParameter("value1", name).getSingleResult();
+            return user;
+        }
+        catch (NoResultException nre) {
+            return null;
+        }
     }
 }

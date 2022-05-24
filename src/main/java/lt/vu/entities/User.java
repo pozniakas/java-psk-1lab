@@ -33,6 +33,10 @@ public class User implements Serializable {
     @Column(name = "EMAIL")
     private String email;
 
+    @Version
+    @Column(name = "OPT_LOCK_VERSION")
+    private Integer version;
+
     @OneToMany(mappedBy = "user")
     private List<UserOrder> orders = new ArrayList<>();
 
