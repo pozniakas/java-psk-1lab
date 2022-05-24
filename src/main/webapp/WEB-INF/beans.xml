@@ -17,6 +17,6 @@
         </interceptors>
 
         <alternatives>
-            <class>lt.vu.services.GenerateFirstName</class>
+            <class>lt.vu.services.GenerateFullName</class>
         </alternatives>
 </beans>

@@ -20,7 +20,7 @@
         <h3>Generate new user name</h3>
         <h:outputText value="Generated name: #{updateUserDetails.generatedName}" />
         <br></br>
-        <h:commandButton value="Generate new name" actionListener="#{updateUserDetails.generateUserName}">
+        <h:commandButton value="Generate new name" action="#{updateUserDetails.generateUserName()}">
             <f:param name="userId" value="#{updateUserDetails.user.id}" />
         </h:commandButton>
     </h:form>

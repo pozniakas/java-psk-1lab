@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lt.vu.entities.User;
 import lt.vu.persistence.UsersDAO;
-import lt.vu.services.GenerateName;
+import lt.vu.services.interfaces.IGenerateName;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -24,7 +24,7 @@ import java.util.concurrent.ExecutionException;
 @Getter @Setter
 public class UpdateUserDetails implements Serializable {
     @Inject
-    GenerateName nameGenerator;
+    IGenerateName nameGenerator;
 
     private CompletableFuture<String> taskToGenerateName = null;
 
@@ -52,8 +52,9 @@ public class UpdateUserDetails implements Serializable {
     }
 
     @Transactional
-    public void generateUserName() {
+    public String generateUserName() {
         taskToGenerateName = CompletableFuture.supplyAsync(() -> nameGenerator.generateName());
+        return "orders.xhtml?userId=" + this.user.getId() + "&faces-redirect=true";
     }
 
     public String getGeneratedName() throws ExecutionException, InterruptedException {
