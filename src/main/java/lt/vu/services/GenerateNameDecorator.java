@@ -16,7 +16,7 @@ public abstract class GenerateNameDecorator implements IGenerateName {
 
     public String generateName() {
         String name = generateName.generateName();
-        name = name + "_PSK";
+        name = name + "_LTU";
 
         return name;
     }
